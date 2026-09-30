@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 115" fill="none">
+  <!-- Dark Pine Shield -->
+  <path d="M50 5 L88 20 C88 65 50 105 50 105 C50 105 12 65 12 20 Z" fill="#0B2B27"/>
+  <!-- Checkmark Path -->
+  <path d="M30 54 L44 68 L66 43" stroke="#F6F4EE" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Saffron Accent Dot at top tip of check -->
+  <circle cx="68" cy="41" r="7.5" fill="#E9A23B"/>
+</svg>
