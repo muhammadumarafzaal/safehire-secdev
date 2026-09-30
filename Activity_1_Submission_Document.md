@@ -9,7 +9,7 @@
 * **Group Members:**
   1. Muhammad Umar Afzaal — Roll No: **23F-3106**
   2. Musa Rehan — Roll No: **23F-3093**
-* **Institution:** National University of Computer & Emerging Sciences (FAST-NUCES), Lahore
+* **Institution:** National University of Computer & Emerging Sciences (FAST-NUCES)
 * **Course:** Secure Software Development (SSD)
 * **Primary User Role:** **Student Job Seeker**
   * *Rationale (Task 4):* The primary stakeholder who suffers most from resume fabrication and predatory recruiter scraping is the student. The interface is engineered around the student's need to verify academic credentials, view anonymized job matches, control contact disclosure through a strict state machine, and apply safely without leaking PII.
@@ -18,7 +18,8 @@
 
 ### 2. Live Website & Repository
 
-* **Public URL:** [https://safehire-portal.vercel.app](https://safehire-portal.vercel.app) *(or your deployed GitHub Pages / Netlify URL)*
+* **Public URL:** [https://safehire-secdev.vercel.app/](https://safehire-secdev.vercel.app/)
+* **Repository URL:** [https://github.com/muhammadumarafzaal/safehire-secdev](https://github.com/muhammadumarafzaal/safehire-secdev)
 * **Local Development Command:** `npm run dev` (Runs locally on `http://localhost:3000/`)
 * **Technology Stack:** React 18, Vite, Lucide React (1.5px stroke), Senior Product Editorial Design System (`tokens.css`) with Inter and JetBrains Mono.
 
