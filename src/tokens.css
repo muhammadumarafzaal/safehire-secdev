@@ -477,10 +477,89 @@ a:focus-visible {
   to { transform: translateY(0); opacity: 1; }
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments & UI Polish */
+@media (max-width: 900px) {
+  .app-nav {
+    height: auto;
+    min-height: 56px;
+    padding: 8px 0;
+  }
+  .nav-inner {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .nav-links-row {
+    height: auto;
+    gap: 16px;
+  }
+  .nav-item-btn {
+    height: 36px;
+  }
+}
+
 @media (max-width: 768px) {
-  .title-display { font-size: 30px; }
-  .title-page { font-size: 24px; }
-  .nav-links-row { gap: var(--space-2); }
-  .container { padding-left: var(--space-2); padding-right: var(--space-2); }
+  .title-display { font-size: 28px; line-height: 1.2; }
+  .title-page { font-size: 22px; }
+  .title-section { font-size: 20px; }
+  .title-card { font-size: 16px; }
+  
+  .container { 
+    padding-left: var(--space-2); 
+    padding-right: var(--space-2); 
+  }
+
+  .editorial-table th,
+  .editorial-table td {
+    padding: 10px 12px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .drawer-panel {
+    padding: 20px;
+    max-width: 95vw;
+  }
+
+  .quiet-toast {
+    min-width: 260px;
+    max-width: calc(100vw - 32px);
+  }
+}
+
+@media (max-width: 480px) {
+  .title-display { font-size: 24px; }
+  .title-page { font-size: 19px; }
+  
+  .hide-on-mobile-xs {
+    display: none !important;
+  }
+
+  .nav-inner {
+    justify-content: center;
+  }
+
+  .nav-brand {
+    margin-right: auto;
+  }
+
+  .nav-links-row {
+    gap: 10px;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .nav-item-btn {
+    font-size: var(--text-xs);
+    padding: 4px 6px;
+  }
+
+  .card-base {
+    padding: 18px 16px !important;
+  }
+
+  .editorial-table th,
+  .editorial-table td {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
 }

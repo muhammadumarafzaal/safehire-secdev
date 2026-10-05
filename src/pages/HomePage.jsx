@@ -1,36 +1,40 @@
 import React from 'react';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Shield, UserCheck, Key, Lock } from 'lucide-react';
 import StatusChip from '../components/StatusChip';
 
-export default function HomePage({ setCurrentPage, onOpenAudit }) {
+export default function HomePage({ setCurrentPage, onOpenAudit, user }) {
+  const isOfficer = user?.role === 'Placement Officer';
+
   return (
     <div style={{ paddingBottom: '64px' }}>
       
       {/* Editorial Hero */}
-      <section style={{ paddingTop: '64px', paddingBottom: '48px', borderBottom: '1px solid var(--line)' }}>
+      <section style={{ paddingTop: '56px', paddingBottom: '48px', borderBottom: '1px solid var(--line)' }}>
         <div className="container">
           
-          <div style={{ maxWidth: '780px' }}>
-            <div className="label-caps" style={{ marginBottom: '16px', color: 'var(--emerald)' }}>
-              Verified Recruitment Platform
+          <div style={{ maxWidth: '820px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+              <span className="label-caps" style={{ color: 'var(--emerald)' }}>
+                SSD Activity 2: Role-Based Prototype
+              </span>
+              <StatusChip variant="mint">2 Functional Roles Active</StatusChip>
             </div>
 
             <h1 className="title-display" style={{ marginBottom: '20px', color: 'var(--ink)' }}>
-              Verified credentials and privacy-preserving student recruitment.
+              Verified credentials and role-segregated recruitment architecture.
             </h1>
 
-            <p className="body-text" style={{ fontSize: '18px', maxWidth: '680px', marginBottom: '32px' }}>
-              SafeHire provides verified academic credentials from university placement offices, 
-              protects student contact information through strict data minimization, 
-              and inspects resume text for prompt injection attempts before matching models run.
+            <p className="body-text" style={{ fontSize: '18px', maxWidth: '720px', marginBottom: '28px' }}>
+              SafeHire implements strict Role-Based Access Control (RBAC). <strong>Role 1 (Student Job Seeker)</strong> controls personal PII under data minimization, while <strong>Role 2 (Placement Officer)</strong> possesses cryptographic signing keys to authenticate degree transcripts and audit corporate recruiters.
             </p>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
               <button 
                 className="btn btn-primary"
                 onClick={() => setCurrentPage('dashboard')}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
               >
-                <span>Open Student Portal</span>
+                <span>{isOfficer ? 'Open Placement Officer Console' : 'Open Student Job Seeker Portal'}</span>
                 <ArrowRight size={16} strokeWidth={1.5} />
               </button>
               
@@ -38,13 +42,56 @@ export default function HomePage({ setCurrentPage, onOpenAudit }) {
                 className="btn btn-secondary"
                 onClick={() => setCurrentPage('login')}
               >
-                Sign In by Role
+                Switch Role / Sign In
+              </button>
+
+              <button 
+                className="btn btn-secondary"
+                onClick={onOpenAudit}
+                style={{ color: 'var(--emerald)', borderColor: 'var(--emerald)' }}
+              >
+                View Audit Ledger (0x8F22A)
               </button>
             </div>
           </div>
 
-          {/* Quiet Metric Summary Row */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', marginTop: '48px', paddingTop: '24px', borderTop: '1px solid var(--line)' }}>
+          {/* Activity 2 Role Switch Cards */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px', marginTop: '36px', paddingTop: '24px', borderTop: '1px solid var(--line)' }}>
+            
+            <div style={{ backgroundColor: 'var(--surface)', padding: '20px', borderRadius: 'var(--radius-md)', border: '1px solid var(--line)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                <span className="label-caps" style={{ color: 'var(--emerald)' }}>Role 1</span>
+                <StatusChip variant="mint">Applicant Scope</StatusChip>
+              </div>
+              <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 600, color: 'var(--ink)' }}>
+                Student Job Seeker (Muhammad Umar Afzaal)
+              </h3>
+              <p style={{ fontSize: 'var(--text-xs)', color: 'var(--ink-muted)', marginTop: '6px', lineHeight: 1.5 }}>
+                • Inspect verified degree badges &amp; transcript checksum<br/>
+                • Filter &amp; apply to jobs with prompt-injection defense<br/>
+                • Enforce selective contact unlock under mutual consent
+              </p>
+            </div>
+
+            <div style={{ backgroundColor: 'var(--surface)', padding: '20px', borderRadius: 'var(--radius-md)', border: '1px solid var(--line)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                <span className="label-caps" style={{ color: 'var(--pine)' }}>Role 2</span>
+                <StatusChip variant="neutral">Administrative Authority</StatusChip>
+              </div>
+              <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 600, color: 'var(--ink)' }}>
+                Placement Officer (Dr. Tariq Mahmood)
+              </h3>
+              <p style={{ fontSize: 'var(--text-xs)', color: 'var(--ink-muted)', marginTop: '6px', lineHeight: 1.5 }}>
+                • Review verification queue &amp; sign transcripts with SHA-256<br/>
+                • Audit &amp; vet corporate recruiter partnerships<br/>
+                • Inspect system-wide immutable telemetry ledger
+              </p>
+            </div>
+
+          </div>
+
+          {/* Metric Summary Row */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginTop: '24px' }}>
             <div>
               <div style={{ fontSize: 'var(--text-xl)', fontWeight: 600, color: 'var(--ink)' }}>100%</div>
               <div className="label-caps" style={{ marginTop: '4px' }}>Placement Verified Transcripts</div>
@@ -57,108 +104,76 @@ export default function HomePage({ setCurrentPage, onOpenAudit }) {
               <div style={{ fontSize: 'var(--text-xl)', fontWeight: 600, color: 'var(--ink)' }}>Pre-Filtered</div>
               <div className="label-caps" style={{ marginTop: '4px' }}>Untrusted Input Inspection</div>
             </div>
+            <div>
+              <div style={{ fontSize: 'var(--text-xl)', fontWeight: 600, color: 'var(--ink)' }}>RBAC 403</div>
+              <div className="label-caps" style={{ marginTop: '4px' }}>Role Boundary Guardrails</div>
+            </div>
           </div>
 
         </div>
       </section>
 
-      {/* Core Controls Section (Replaces buzzword "Pillars") */}
+      {/* Core Controls Section */}
+      <section style={{ padding: '48px 0', borderBottom: '1px solid var(--line)' }}>
+        <div className="container">
+          <div style={{ marginBottom: '32px' }}>
+            <span className="label-caps">Security-Aware Architecture</span>
+            <h2 className="title-section" style={{ marginTop: '4px' }}>
+              System Guardrails &amp; Security Controls
+            </h2>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
+            
+            <div className="card-base" style={{ padding: '24px' }}>
+              <div className="label-caps" style={{ color: 'var(--emerald)', marginBottom: '8px' }}>Control 01</div>
+              <h3 className="title-card">Role-Based Access Control (RBAC)</h3>
+              <p className="body-sm" style={{ marginTop: '8px' }}>
+                Separation of Duties dictates that Students cannot self-certify academic records. Only authenticated Placement Officers possess the cryptographic private keys to sign degrees.
+              </p>
+              <div style={{ marginTop: '16px' }}>
+                <StatusChip variant="mint">Separation of Duties</StatusChip>
+              </div>
+            </div>
+
+            <div className="card-base" style={{ padding: '24px' }}>
+              <div className="label-caps" style={{ color: 'var(--emerald)', marginBottom: '8px' }}>Control 02</div>
+              <h3 className="title-card">Data Minimization &amp; PII Masking</h3>
+              <p className="body-sm" style={{ marginTop: '8px' }}>
+                Candidate personal phone numbers and CNICs remain strictly masked as <code>+92 3•• ••• ••21</code> until mutual consent is explicitly confirmed via a state transition.
+              </p>
+              <div style={{ marginTop: '16px' }}>
+                <StatusChip variant="saffron">OWASP Minimization</StatusChip>
+              </div>
+            </div>
+
+            <div className="card-base" style={{ padding: '24px' }}>
+              <div className="label-caps" style={{ color: 'var(--emerald)', marginBottom: '8px' }}>Control 03</div>
+              <h3 className="title-card">Untrusted Input Defense Scanner</h3>
+              <p className="body-sm" style={{ marginTop: '8px' }}>
+                Candidate notes and uploaded documents pass through an AST tokenizer to intercept prompt injection attempts (e.g. <em>"Ignore previous instructions"</em>) before LLMs evaluate matches.
+              </p>
+              <div style={{ marginTop: '16px' }}>
+                <StatusChip variant="mint">Active Interception</StatusChip>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* Lifecycle Flow Summary */}
       <section style={{ padding: '48px 0' }}>
         <div className="container">
-          
-          <div style={{ marginBottom: '32px' }}>
-            <div className="label-caps" style={{ marginBottom: '6px' }}>System Controls</div>
-            <h2 className="title-page">How verification and privacy operate</h2>
-            <p className="body-sm" style={{ marginTop: '4px' }}>
-              Built according to least privilege, fail-safe defaults, and untrusted input defense.
-            </p>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
-            
-            {/* Control 1 */}
-            <div className="card-base">
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
-                <span className="label-caps">Credential Integrity</span>
-                <StatusChip variant="mint">Verified</StatusChip>
-              </div>
-              <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 600, marginBottom: '8px', color: 'var(--ink)' }}>
-                Placement Officer Signatures
-              </h3>
-              <p className="body-sm" style={{ marginBottom: '16px' }}>
-                University placement officers digitally sign academic claims and CGPA records. Recruiters verify candidate qualifications directly against institutional digests.
-              </p>
-              <button 
-                onClick={onOpenAudit}
-                style={{ background: 'none', border: 'none', color: 'var(--emerald)', fontSize: 'var(--text-xs)', fontWeight: 500, padding: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}
-              >
-                Inspect sample audit record &rarr;
-              </button>
-            </div>
-
-            {/* Control 2 */}
-            <div className="card-base">
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
-                <span className="label-caps">Data Minimization</span>
-                <StatusChip variant="mint">Enforced</StatusChip>
-              </div>
-              <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 600, marginBottom: '8px', color: 'var(--ink)' }}>
-                Selective Contact Disclosure
-              </h3>
-              <p className="body-sm" style={{ marginBottom: '16px' }}>
-                Student contact fields (phone, email, home address, CNIC) remain masked from recruiters during initial review. Details unlock only after an interview offer is mutually accepted.
-              </p>
-              <span className="body-sm" style={{ color: 'var(--ink-muted)', fontSize: 'var(--text-xs)' }}>
-                Prevents unauthorized candidate harvesting.
-              </span>
-            </div>
-
-            {/* Control 3 */}
-            <div className="card-base">
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
-                <span className="label-caps">Untrusted Input Defense</span>
-                <StatusChip variant="saffron">Pre-Filter</StatusChip>
-              </div>
-              <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 600, marginBottom: '8px', color: 'var(--ink)' }}>
-                Adversarial Prompt Inspection
-              </h3>
-              <p className="body-sm" style={{ marginBottom: '16px' }}>
-                All user-submitted resumes and application notes are treated as untrusted inputs. Texts are screened for instruction overrides before any matching language model evaluates the application.
-              </p>
-              <span className="body-sm" style={{ color: 'var(--ink-muted)', fontSize: 'var(--text-xs)' }}>
-                Defense against indirect prompt injection.
-              </span>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* Primary Lifecycle Card Summary */}
-      <section style={{ padding: '0 0 48px' }}>
-        <div className="container">
           <div className="card-base" style={{ padding: '32px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px', marginBottom: '16px' }}>
-              <div>
-                <span className="label-caps">Core Workflow</span>
-                <h3 className="title-page" style={{ marginTop: '4px' }}>
-                  The 4-stage contact authorization lifecycle
-                </h3>
-              </div>
-              <button 
-                className="btn btn-secondary btn-sm"
-                onClick={() => setCurrentPage('dashboard')}
-              >
-                Test in Student Portal &rarr;
-              </button>
+            <div style={{ marginBottom: '24px' }}>
+              <span className="label-caps">Access State Machine</span>
+              <h2 className="title-card" style={{ marginTop: '4px' }}>
+                Controlled 4-Stage Candidate Disclosure Lifecycle
+              </h2>
             </div>
 
-            <p className="body-sm" style={{ maxWidth: '640px', marginBottom: '24px' }}>
-              The application state machine governs the boundary between candidate evaluation and personal identity disclosure.
-            </p>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
               <div style={{ backgroundColor: 'var(--surface-2)', padding: '16px', borderRadius: 'var(--radius-md)', border: '1px solid var(--line)' }}>
                 <div className="label-caps" style={{ color: 'var(--emerald)' }}>Stage 01</div>
                 <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--ink)', marginTop: '4px' }}>Applied</div>

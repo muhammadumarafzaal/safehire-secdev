@@ -6,17 +6,12 @@ import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import AuditDrawer from './components/AuditDrawer';
 import Toast from './components/Toast';
+import { DEMO_USERS } from './data/demoUsers';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'login' | 'dashboard'
-  const [user, setUser] = useState({
-    name: 'Muhammad Umar Afzaal',
-    rollNo: '23F-3106',
-    role: 'Student Job Seeker',
-    university: 'FAST-NUCES, Lahore',
-    degree: 'BS Computer Science',
-    cgpa: '3.78'
-  });
+  // Initial default: Student Job Seeker demo user
+  const [user, setUser] = useState(DEMO_USERS.student);
   const [isAuditOpen, setIsAuditOpen] = useState(false);
   const [toasts, setToasts] = useState([]);
 
@@ -26,16 +21,30 @@ export default function App() {
 
     setTimeout(() => {
       setToasts(prev => prev.filter(t => t.id !== id));
-    }, 3800);
+    }, 4000);
   };
 
   const removeToast = (id) => {
     setToasts(prev => prev.filter(t => t.id !== id));
   };
 
+  // Protected Route Check (Part 9 - Ensure protected dashboard cannot be viewed while logged out)
+  useEffect(() => {
+    if (currentPage === 'dashboard' && !user) {
+      setCurrentPage('login');
+      addToast('Protected View: Please sign in with a demo role to access the dashboard.', 'warning');
+    }
+  }, [currentPage, user]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage]);
+
+  const handleLogout = () => {
+    setUser(null);
+    setCurrentPage('login');
+    addToast('Signed out successfully. Session credentials purged.', 'info');
+  };
 
   return (
     <div className="app-root">
@@ -48,11 +57,12 @@ export default function App() {
         addToast={addToast}
       />
 
-      {/* Pages View */}
+      {/* Main Pages */}
       {currentPage === 'home' && (
         <HomePage 
           setCurrentPage={setCurrentPage} 
           onOpenAudit={() => setIsAuditOpen(true)}
+          user={user}
         />
       )}
 
@@ -68,7 +78,9 @@ export default function App() {
         <DashboardPage 
           user={user}
           onOpenAudit={() => setIsAuditOpen(true)}
+          onLogout={handleLogout}
           addToast={addToast}
+          setCurrentPage={setCurrentPage}
         />
       )}
 
