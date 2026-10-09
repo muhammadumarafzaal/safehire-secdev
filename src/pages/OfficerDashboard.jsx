@@ -19,7 +19,7 @@ import StatTile from '../components/StatTile';
 import StatusChip from '../components/StatusChip';
 import { INITIAL_VERIFICATION_QUEUE, INITIAL_COMPANY_VETTING } from '../data/demoUsers';
 
-export default function OfficerDashboard({ user, onOpenAudit, onLogout, addToast }) {
+export default function OfficerDashboard({ user, onOpenAudit, onLogout, addToast, setCurrentPage, opportunities = [] }) {
   const [verificationQueue, setVerificationQueue] = useState(INITIAL_VERIFICATION_QUEUE);
   const [companyList, setCompanyList] = useState(INITIAL_COMPANY_VETTING);
   const [signingStudentId, setSigningStudentId] = useState(null);
@@ -129,12 +129,26 @@ export default function OfficerDashboard({ user, onOpenAudit, onLogout, addToast
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+            <button 
+              className="btn btn-secondary btn-sm"
+              onClick={() => setCurrentPage && setCurrentPage('post-job')}
+              title="Module 1 (Umar Afzaal): Post Verified Opportunity"
+            >
+              <span>Post Opportunity (M1)</span>
+            </button>
+            <button 
+              className="btn btn-secondary btn-sm"
+              onClick={() => setCurrentPage && setCurrentPage('browse-jobs')}
+              title="Module 2 (Musa Rehan): Browse Opportunities"
+            >
+              <span>Browse Catalog (M2)</span>
+            </button>
             <button 
               className="btn btn-secondary btn-sm"
               onClick={onOpenAudit}
             >
-              <span>Inspect Immutable Ledger </span>
+              <span>Audit Ledger </span>
               <span className="mono-meta" style={{ color: 'var(--emerald)' }}>0x8F22A</span>
             </button>
             <button 

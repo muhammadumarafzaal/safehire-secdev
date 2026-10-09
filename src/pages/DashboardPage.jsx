@@ -2,7 +2,7 @@ import React from 'react';
 import StudentDashboard from './StudentDashboard';
 import OfficerDashboard from './OfficerDashboard';
 
-export default function DashboardPage({ user, onOpenAudit, onLogout, addToast, setCurrentPage }) {
+export default function DashboardPage({ user, onOpenAudit, onLogout, addToast, setCurrentPage, opportunities = [] }) {
   // Defensive check: if unauthenticated, prompt redirect to login
   if (!user) {
     return (
@@ -37,6 +37,8 @@ export default function DashboardPage({ user, onOpenAudit, onLogout, addToast, s
         onOpenAudit={onOpenAudit}
         onLogout={onLogout}
         addToast={addToast}
+        setCurrentPage={setCurrentPage}
+        opportunities={opportunities}
       />
     );
   }
@@ -48,6 +50,8 @@ export default function DashboardPage({ user, onOpenAudit, onLogout, addToast, s
       onOpenAudit={onOpenAudit}
       onLogout={onLogout}
       addToast={addToast}
+      setCurrentPage={setCurrentPage}
+      opportunities={opportunities}
     />
   );
 }

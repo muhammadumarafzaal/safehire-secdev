@@ -81,7 +81,7 @@ const JOBS_DATA = [
   }
 ];
 
-export default function StudentDashboard({ user, onOpenAudit, onLogout, addToast }) {
+export default function StudentDashboard({ user, onOpenAudit, onLogout, addToast, setCurrentPage, opportunities = [] }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [category, setCategory] = useState('all');
   const [applicationsCount, setApplicationsCount] = useState(4);
@@ -100,12 +100,15 @@ export default function StudentDashboard({ user, onOpenAudit, onLogout, addToast
   // Part 8: PII Masking Perspective Toggle
   const [previewRecruiterView, setPreviewRecruiterView] = useState(true);
 
+  // Active opportunities connected to shared store (Activity 3 Integration)
+  const activeJobs = opportunities && opportunities.length > 0 ? opportunities : JOBS_DATA;
+
   // Filter jobs
-  const filteredJobs = JOBS_DATA.filter(job => {
+  const filteredJobs = activeJobs.filter(job => {
     const matchesSearch = 
       job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      job.tags.some(t => t.toLowerCase().includes(searchTerm.toLowerCase()));
+      (job.tags && job.tags.some(t => t.toLowerCase().includes(searchTerm.toLowerCase())));
 
     const matchesCategory = category === 'all' || job.category === category;
 

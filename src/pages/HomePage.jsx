@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowRight, CheckCircle2, Shield, UserCheck, Key, Lock } from 'lucide-react';
 import StatusChip from '../components/StatusChip';
 
-export default function HomePage({ setCurrentPage, onOpenAudit, user }) {
+export default function HomePage({ setCurrentPage, onOpenAudit, user, opportunitiesCount = 6 }) {
   const isOfficer = user?.role === 'Placement Officer';
 
   return (
@@ -12,37 +12,45 @@ export default function HomePage({ setCurrentPage, onOpenAudit, user }) {
       <section style={{ paddingTop: '56px', paddingBottom: '48px', borderBottom: '1px solid var(--line)' }}>
         <div className="container">
           
-          <div style={{ maxWidth: '820px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+          <div style={{ maxWidth: '840px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px', flexWrap: 'wrap' }}>
               <span className="label-caps" style={{ color: 'var(--emerald)' }}>
-                SSD Activity 2: Role-Based Prototype
+                SSD Activity 3: Parallel Module Integration
               </span>
-              <StatusChip variant="mint">2 Functional Roles Active</StatusChip>
+              <StatusChip variant="mint">2 Functional Modules Integrated</StatusChip>
+              <StatusChip variant="saffron">{opportunitiesCount} Active Requisitions</StatusChip>
             </div>
 
             <h1 className="title-display" style={{ marginBottom: '20px', color: 'var(--ink)' }}>
-              Verified credentials and role-segregated recruitment architecture.
+              Verified credentials and integrated recruitment modules.
             </h1>
 
-            <p className="body-text" style={{ fontSize: '18px', maxWidth: '720px', marginBottom: '28px' }}>
-              SafeHire implements strict Role-Based Access Control (RBAC). <strong>Role 1 (Student Job Seeker)</strong> controls personal PII under data minimization, while <strong>Role 2 (Placement Officer)</strong> possesses cryptographic signing keys to authenticate degree transcripts and audit corporate recruiters.
+            <p className="body-text" style={{ fontSize: '18px', maxWidth: '740px', marginBottom: '28px' }}>
+              SafeHire unites two parallel functional modules: <strong>Module 1 (Post Verified Opportunity)</strong> engineered by Muhammad Umar Afzaal (23F-3106), and <strong>Module 2 (Browse &amp; Search Opportunities)</strong> engineered by Musa Rehan (23F-3093), bound by shared application state and cryptographic verification proof.
             </p>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
               <button 
                 className="btn btn-primary"
-                onClick={() => setCurrentPage('dashboard')}
+                onClick={() => setCurrentPage('browse-jobs')}
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
               >
-                <span>{isOfficer ? 'Open Placement Officer Console' : 'Open Student Job Seeker Portal'}</span>
+                <span>Browse Catalog (Module 2)</span>
                 <ArrowRight size={16} strokeWidth={1.5} />
+              </button>
+
+              <button 
+                className="btn btn-secondary"
+                onClick={() => setCurrentPage('post-job')}
+              >
+                Post Opportunity (Module 1)
               </button>
               
               <button 
                 className="btn btn-secondary"
-                onClick={() => setCurrentPage('login')}
+                onClick={() => setCurrentPage('dashboard')}
               >
-                Switch Role / Sign In
+                {isOfficer ? 'Placement Console' : 'Student Portal'}
               </button>
 
               <button 
@@ -50,13 +58,64 @@ export default function HomePage({ setCurrentPage, onOpenAudit, user }) {
                 onClick={onOpenAudit}
                 style={{ color: 'var(--emerald)', borderColor: 'var(--emerald)' }}
               >
-                View Audit Ledger (0x8F22A)
+                Audit Ledger (0x8F22A)
               </button>
             </div>
           </div>
 
+          {/* Activity 3 Parallel Modules Cards */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px', marginTop: '36px', paddingTop: '24px', borderTop: '1px solid var(--line)' }}>
+            
+            <div style={{ backgroundColor: 'var(--surface)', padding: '22px', borderRadius: 'var(--radius-md)', border: '1px solid var(--line)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+                <span className="label-caps" style={{ color: 'var(--emerald)' }}>Module 1 (Member 1)</span>
+                <StatusChip variant="mint">Umar Afzaal (23F-3106)</StatusChip>
+              </div>
+              <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 600, color: 'var(--ink)' }}>
+                Post Verified Opportunity
+              </h3>
+              <p style={{ fontSize: 'var(--text-xs)', color: 'var(--ink-muted)', marginTop: '8px', lineHeight: 1.5, marginBottom: '16px' }}>
+                • Enterprise requisition submission with strict input validation<br/>
+                • Anti-XSS sanitization against malicious payload injection<br/>
+                • Computes cryptographic verification digest (<code>0xVER-...</code>)<br/>
+                • Immediate live feed display of newly posted positions
+              </p>
+              <button 
+                className="btn btn-secondary btn-sm"
+                onClick={() => setCurrentPage('post-job')}
+                style={{ width: '100%', justifyContent: 'center' }}
+              >
+                Launch Module 1 Requisition Form &rarr;
+              </button>
+            </div>
+
+            <div style={{ backgroundColor: 'var(--surface)', padding: '22px', borderRadius: 'var(--radius-md)', border: '1px solid var(--line)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+                <span className="label-caps" style={{ color: 'var(--pine)' }}>Module 2 (Member 2)</span>
+                <StatusChip variant="neutral">Musa Rehan (23F-3093)</StatusChip>
+              </div>
+              <h3 style={{ fontSize: 'var(--text-base)', fontWeight: 600, color: 'var(--ink)' }}>
+                Browse &amp; Search Opportunities
+              </h3>
+              <p style={{ fontSize: 'var(--text-xs)', color: 'var(--ink-muted)', marginTop: '8px', lineHeight: 1.5, marginBottom: '16px' }}>
+                • Dynamic search engine with query sanitization &amp; length guardrail<br/>
+                • Multi-facet filtering by domain, work mode, and Fair-Stipend SLA<br/>
+                • Cryptographic verification proof inspection modal<br/>
+                • Reactive result counter and bookmark state machine
+              </p>
+              <button 
+                className="btn btn-secondary btn-sm"
+                onClick={() => setCurrentPage('browse-jobs')}
+                style={{ width: '100%', justifyContent: 'center' }}
+              >
+                Launch Module 2 Explorer &rarr;
+              </button>
+            </div>
+
+          </div>
+
           {/* Activity 2 Role Switch Cards */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px', marginTop: '36px', paddingTop: '24px', borderTop: '1px solid var(--line)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px', marginTop: '20px' }}>
             
             <div style={{ backgroundColor: 'var(--surface)', padding: '20px', borderRadius: 'var(--radius-md)', border: '1px solid var(--line)' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>

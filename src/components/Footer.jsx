@@ -34,10 +34,26 @@ export default function Footer({ setCurrentPage }) {
               </li>
               <li>
                 <button 
+                  onClick={() => setCurrentPage('browse-jobs')}
+                  style={{ background: 'none', border: 'none', color: 'var(--ink)', fontSize: 'var(--text-sm)', cursor: 'pointer', padding: 0 }}
+                >
+                  Browse Catalog (Module 2)
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => setCurrentPage('post-job')}
+                  style={{ background: 'none', border: 'none', color: 'var(--ink)', fontSize: 'var(--text-sm)', cursor: 'pointer', padding: 0 }}
+                >
+                  Post Requisition (Module 1)
+                </button>
+              </li>
+              <li>
+                <button 
                   onClick={() => setCurrentPage('dashboard')}
                   style={{ background: 'none', border: 'none', color: 'var(--ink)', fontSize: 'var(--text-sm)', cursor: 'pointer', padding: 0 }}
                 >
-                  Student Portal
+                  Role Dashboards
                 </button>
               </li>
               <li>

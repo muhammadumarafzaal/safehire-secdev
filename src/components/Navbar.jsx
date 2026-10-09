@@ -40,7 +40,7 @@ export default function Navbar({ currentPage, setCurrentPage, user, setUser, add
 
         {/* Links Center */}
         <nav aria-label="Main Navigation">
-          <ul className="nav-links-row">
+          <ul className="nav-links-row" style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
             <li>
               <button 
                 className={`nav-item-btn ${currentPage === 'home' ? 'active' : ''}`}
@@ -60,6 +60,26 @@ export default function Navbar({ currentPage, setCurrentPage, user, setUser, add
                 </button>
               </li>
             ) : null}
+
+            <li>
+              <button 
+                className={`nav-item-btn ${currentPage === 'browse-jobs' ? 'active' : ''}`}
+                onClick={() => setCurrentPage('browse-jobs')}
+                title="Module 2 (Musa Rehan): Browse & Search Opportunities"
+              >
+                Browse Catalog
+              </button>
+            </li>
+
+            <li>
+              <button 
+                className={`nav-item-btn ${currentPage === 'post-job' ? 'active' : ''}`}
+                onClick={() => setCurrentPage('post-job')}
+                title="Module 1 (Umar Afzaal): Post Verified Opportunity"
+              >
+                Post Opportunity
+              </button>
+            </li>
 
             <li>
               <button 
